@@ -9,6 +9,7 @@ import java.util.Date;
 
 public class DivideAndConquerStrategy {
 
+  //TODO : need to implement n dimension capability
   public static Pair findClosestPair(XYPoint[] points) {
     XComparator lessThanX = new XComparator();
     YComparator lessThanY = new YComparator();
