@@ -10,6 +10,17 @@ import static org.junit.Assert.assertThat;
 public class DivideAndConquerStrategyTest {
 
     @Test
+    public void shouldReturnEmptyPairObjectIfArrayContainsOnePoint() {
+        XYPoint[] points = new XYPoint[1];
+        points[0] = new XYPoint(123213, 3434);
+
+        final Pair pair = DivideAndConquerStrategy.findClosestPair(points);
+
+        assertThat("1st pair should be null", pair.one == null, equalTo(true));
+        assertThat("2nd pair should be null", pair.two == null, equalTo(true));
+    }
+
+    @Test
     public void shouldFindClosestPair() throws Exception {
         XYPoint[] points = constructDummyPoints();
 
