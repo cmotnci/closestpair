@@ -77,8 +77,21 @@ public class DivideAndConquerStrategyTest {
         assertThat("Should be same result", sameResult, equalTo(true));
     }
 
+    @Test
+    public void shouldHaveExactResultFor100dPoints() throws Exception {
+        final Point[] points = constructDummy100dPoints();
+        final Pair pair = DivideAndConquerStrategy.findClosestPair(points);
+        final boolean match = (pair.one.line == 48 || pair.one.line == 96) || ((pair.two.line == 48 || pair.two.line == 96));
+        assertThat("Should match", match, equalTo(true));
+    }
+
     private Point[] constructDummy2dPoints() throws IOException {
         final InputStream inputStream = this.getClass().getResourceAsStream("/sample/sample_input_2_8.tsv");
+        return PointReader.constructPoints(inputStream);
+    }
+
+    private Point[] constructDummy100dPoints() throws IOException {
+        final InputStream inputStream = this.getClass().getResourceAsStream("/sample/sample_input_100_100.tsv");
         return PointReader.constructPoints(inputStream);
     }
 }
