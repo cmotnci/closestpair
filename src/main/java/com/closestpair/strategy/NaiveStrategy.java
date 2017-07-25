@@ -1,13 +1,13 @@
 package com.closestpair.strategy;
 
 import com.closestpair.model.Pair;
-import com.closestpair.model.XYPoint;
+import com.closestpair.model.Point;
 
 import java.util.Date;
 
 public class NaiveStrategy {
 
-  public static Pair findClosestPair(XYPoint points[]) {
+  public static Pair findClosestPair(Point points[]) {
     Date startTimeNaive = new Date();
     Pair closestPair = findClosestPairHelper(points);
     Date endTimeNaive = new Date();
@@ -17,7 +17,7 @@ public class NaiveStrategy {
     return closestPair;
   }
 
-  private static Pair findClosestPairHelper(XYPoint points[]) {
+  private static Pair findClosestPairHelper(Point points[]) {
     Pair closest = new Pair(null, null);
     int j = 0;
     while (j <= points.length - 2) {

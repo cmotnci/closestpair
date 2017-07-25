@@ -1,8 +1,12 @@
 package com.closestpair.strategy;
 
 import com.closestpair.model.Pair;
-import com.closestpair.model.XYPoint;
+import com.closestpair.model.Point;
+import com.closestpair.util.PointReader;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
@@ -11,8 +15,9 @@ public class DivideAndConquerStrategyTest {
 
     @Test
     public void shouldReturnEmptyPairObjectIfArrayContainsOnePoint() {
-        XYPoint[] points = new XYPoint[1];
-        points[0] = new XYPoint(123213, 3434);
+        Point[] points = new Point[1];
+        double[] coords = {23123, 2323};
+        points[0] = new Point(1, coords);
 
         final Pair pair = DivideAndConquerStrategy.findClosestPair(points);
 
@@ -22,7 +27,7 @@ public class DivideAndConquerStrategyTest {
 
     @Test
     public void shouldFindClosestPair() throws Exception {
-        XYPoint[] points = constructDummyPoints();
+        Point[] points = constructDummy2dPoints();
 
         Pair pairDC = DivideAndConquerStrategy.findClosestPair(points);
         Pair pairNaive = NaiveStrategy.findClosestPair(points);
@@ -33,11 +38,15 @@ public class DivideAndConquerStrategyTest {
 
     @Test
     public void shouldFindOnePairIfThereIsAnotherPairWithSameDistance() {
-        XYPoint[] points = new XYPoint[4];
-        points[0] = new XYPoint(-1, 1);
-        points[1] = new XYPoint(1, 1);
-        points[2] = new XYPoint(-1, -1);
-        points[3] = new XYPoint(1, -1);
+        Point[] points = new Point[4];
+        double[] coord0 = {-1, 1};
+        double[] coord1 = {1, 1};
+        double[] coord2 = {-1, -1};
+        double[] coord3 = {1, -1};
+        points[0] = new Point(1, coord0);
+        points[1] = new Point(2, coord1);
+        points[2] = new Point(3, coord2);
+        points[3] = new Point(4, coord3);
 
         final Pair pair = DivideAndConquerStrategy.findClosestPair(points);
         assertThat("Not null", pair == null, equalTo(false));
@@ -45,7 +54,7 @@ public class DivideAndConquerStrategyTest {
 
     @Test
     public void shouldFindExactPair() throws Exception {
-        XYPoint[] points = constructDummyPoints();
+        Point[] points = constructDummy2dPoints();
 
         Pair pairDC = DivideAndConquerStrategy.findClosestPair(points);
         Pair pairNaive = NaiveStrategy.findClosestPair(points);
@@ -58,7 +67,7 @@ public class DivideAndConquerStrategyTest {
 
     @Test
     public void shouldHaveSameResultBothStrategies() throws Exception {
-        XYPoint[] points = constructDummyPoints();
+        Point[] points = constructDummy2dPoints();
 
         Pair pairDC = DivideAndConquerStrategy.findClosestPair(points);
         Pair pairNaive = NaiveStrategy.findClosestPair(points);
@@ -68,17 +77,8 @@ public class DivideAndConquerStrategyTest {
         assertThat("Should be same result", sameResult, equalTo(true));
     }
 
-    private XYPoint[] constructDummyPoints() {
-        XYPoint[] points = new XYPoint[8];
-        points[0] = new XYPoint(-262972, 508697);
-        points[1] = new XYPoint(-311943.65362731507, 370239.3559213022);
-        points[2] = new XYPoint(742431, -772652);
-        points[3] = new XYPoint(-346046, 696615.3537438104);
-        points[4] = new XYPoint(194172, 103527);
-        points[5] = new XYPoint(726621.8167057682, -813087.8844925504);
-        points[6] = new XYPoint(167923, -312455.0459619701);
-        points[7] = new XYPoint(499664.42762545496, 72395.09685360803);
-
-        return points;
+    private Point[] constructDummy2dPoints() throws IOException {
+        final InputStream inputStream = this.getClass().getResourceAsStream("/sample/sample_input_2_8.tsv");
+        return PointReader.constructPoints(inputStream);
     }
 }

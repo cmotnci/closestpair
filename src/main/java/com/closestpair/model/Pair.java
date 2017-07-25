@@ -2,11 +2,11 @@ package com.closestpair.model;
 
 public class Pair {
 
-  public XYPoint one;
-  public XYPoint two;
+  public Point one;
+  public Point two;
   public long elapsedTime;
 
-  public Pair(XYPoint newone, XYPoint newtwo) {
+  public Pair(Point newone, Point newtwo) {
     one = newone;
     two = newtwo;
     elapsedTime = 0L;

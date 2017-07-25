@@ -25,7 +25,7 @@ public class FileUploadController {
 
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile multipartFile, Model model) throws IOException {
-        String message = distanceService.findClosestPointsAndConstructMessage(multipartFile);
+        String message = distanceService.findClosestPointsAndConstructMessage(multipartFile.getInputStream());
         model.addAttribute("message", message);
 
         return "resultForm";
