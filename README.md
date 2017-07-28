@@ -43,7 +43,7 @@ closer than d to the middle vertical line. Build an array strip[] of all such po
 - Sort the array strip[] according to y coordinates and find the smallest distance in strip[].
     
 # Using application
-You can use application from http://13.59.246.218:8080
+You can use application from http://18.220.62.191:8080
 
 # Test files
 You can find sample files under /resources/sample folder
